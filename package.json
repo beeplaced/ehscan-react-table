@@ -1,0 +1,35 @@
+{
+  "name": "ehscan-react-table",
+  "version": "0.0.1",
+  "description": "components",
+  "main": "dist/Components.js",
+  "types": "dist/Components.d.ts",
+  "scripts": {
+    "build": "tsc && npm run copy-css",
+    "copy-css": "rsync -a src/style/ dist/style/",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "state",
+    "global-state",
+    "store",
+    "minimal"
+  ],
+  "author": "beeplaced",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/glob": "8",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "glob": "8",
+    "minimatch": "5",
+    "typescript": "^5.6.3"
+  }
+}
