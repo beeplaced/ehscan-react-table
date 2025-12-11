@@ -75,6 +75,7 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <>
+      <div className={styles.tablefooter}>
       <div className={styles.paginationwrapper}>
         {totalPages > 1 && (
           <>
@@ -96,6 +97,8 @@ export const Pagination: React.FC<Props> = ({
         )}
       </div>
       <PaginationOutput />
+    </div>
     </>
+
   );
 };

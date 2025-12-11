@@ -206,7 +206,7 @@ export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder,
               const CellComponent = cellComponents[type];
               return (
                 <td key={ci} >
-                  <CellComponent row={row} col={col.tag} />
+                  <div className={styles.exttablediv}><CellComponent row={row} col={col.tag} /></div>
                 </td>
               );
             })}
