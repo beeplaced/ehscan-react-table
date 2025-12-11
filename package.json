@@ -1,11 +1,12 @@
 {
   "name": "ehscan-react-table",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "components",
   "main": "dist/Components.js",
   "types": "dist/Components.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && npm run copy-css",
+    "copy-css": "rsync -a src/**/*.module.css dist/elements/"
   },
   "keywords": [
     "react",
