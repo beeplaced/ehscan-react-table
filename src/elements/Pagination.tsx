@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PaginationButton from "./PaginationButton";
-import styles from '../style/table.module.css';
+import styles from './table.module.css';
 
 interface Props {
   totalItems: number;               // total number of rows/items
@@ -11,7 +11,7 @@ interface Props {
   onPageChange: (page: number) => void; // callback when page changes
 }
 
-const Pagination: React.FC<Props> = ({
+export const Pagination: React.FC<Props> = ({
   totalItems,
   currentEntries,
   limit,
@@ -99,5 +99,3 @@ const Pagination: React.FC<Props> = ({
     </>
   );
 };
-
-export default Pagination;

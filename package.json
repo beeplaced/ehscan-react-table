@@ -5,9 +5,7 @@
   "main": "dist/Components.js",
   "types": "dist/Components.d.ts",
   "scripts": {
-    "build": "tsc && npm run copy-css",
-    "copy-css": "rsync -a src/style/ dist/style/",
-    "prepublishOnly": "npm run build"
+    "build": "tsc"
   },
   "keywords": [
     "react",
@@ -31,5 +29,8 @@
     "glob": "8",
     "minimatch": "5",
     "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "vite-plugin-libcss": "^1.1.2"
   }
 }

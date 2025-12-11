@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { MouseEvent } from 'react';
-import styles from '../table.module.css';
+import styles from './table.module.css';
 
 const PaginationRipple = () => {
   

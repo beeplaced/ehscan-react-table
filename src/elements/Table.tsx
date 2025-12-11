@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import TableCellSelectHeadCol from "./TableCellSelectHeadCol";
 import { debounce } from "./Debounce";
-import styles from '../style/table.module.css';
+import styles from './table.module.css';
 
 type HeadSearchBarProps = {
   content: string;

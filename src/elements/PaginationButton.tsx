@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PaginationRipple from './PaginationRipple';
-import styles from '../table.module.css';
+import styles from './table.module.css';
 
 interface PaginationButtonProps {
   index?: string | number;
