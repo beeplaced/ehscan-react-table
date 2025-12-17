@@ -170,10 +170,12 @@ input.headsearch:focus {
 
 input.headsearch {
   color: var(--ext-tab-input-clr, white);
+  font-weight: var(--ext-tab-input-font-weight, 400);
 }
 
 input.headsearch::placeholder {
   color: var(--ext-tab-input-clr, white);
+  font-weight: var(--ext-tab-input-font-weight, 400);
   opacity: 1;
 }
 
@@ -203,15 +205,27 @@ svg.removesearchsvg{
     background: transparent;
     border-radius: var(--ext-search-wrapper-padding, 4px);
     height: var(--ext-search-wrapper-height, 25px);
+    --input-padding: 1px 5px 3px 0;
 }
 
-.searchwrapper:hover{
-    background: rgba(0,0,0,0.2);
-}
 
 .focused {
     border: var(--ext-search-wrapper-focused-border, 1px dashed white);
     color: white;
+    --input-padding: 1px 5px 3px 10px;
+}
+
+input.headsearch {
+    border: none;
+    border-radius: 4px;
+    width: 98%;
+    padding: var(--input-padding);
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+.searchwrapper:hover{
+    background: rgba(0,0,0,0.2);
 }
 
 svg {
@@ -239,15 +253,6 @@ svg {
     color: var(--ext-table-cell-clr, lightslategrey);
 }
 
-input.headsearch {
-    border: none;
-    border-radius: 4px;
-    width: 98%;
-    padding: 1px 6px 3px 6px;
-    box-sizing: border-box;
-    background-color: transparent;
-}
-
 input.headsearch:hover {
     border: none;
     cursor: pointer;
@@ -265,19 +270,21 @@ input.headsearch:focus {
 }
 
 .headcolcellmain{
+    color: var(--ext-tab-input-clr, white);
+    font-weight: var(--ext-tab-input-font-weight, 400);
+    line-height: 1.5;
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .deftabletr > td, .trstickyhead > th {
     padding: 0;
     text-align: left;
-    color: #374151;
     box-sizing: border-box;
     font-size: 80%;
-    padding: 5px;
+    padding: 5px 5px 5px 0;
     width: var(--custom-width) !important;
     min-width: 30px;
 }
@@ -313,6 +320,7 @@ input.headsearch:focus {
 
 .headsearchwrapper {
     position: relative;
+    width: 100%;
 }
 
 .sort-col {
@@ -323,11 +331,11 @@ input.headsearch:focus {
     position: fixed;
     margin-left: 6px;
     margin-top: 0;
-    font-size: var(--ext-table-header-font-size, 50%);
+    font-size: var(--ext-table-header-font-size, 55%);
     background-color: var(--ext-table-header-bkc-clr, darkgoldenrod);
     color: var(--ext-table-header-clr, darkslategrey);
     border-radius: 4px;
-    padding: 2px 5px;
+    padding: 0 5px;
     opacity: 0;
     transition: opacity 0.3s ease, margin-top 0.3s ease;
 }
@@ -491,4 +499,62 @@ RIPPLE
 		transform: scale(4);
 		opacity: 0;
 	}
+}
+
+.dateTag {
+	position: relative;
+	color: var(--ext-table-date-tag-clr, black);
+	padding: 3px 6px;
+	border-radius: 4px;
+	font-size: 0.65rem;
+	font-weight: 600;
+	display: inline-block;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: fit-content;
+	z-index: 0;
+}
+.dateTag::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: var(--ext-table-date-tag-bck-clr, darkgrey);
+	opacity: 0.7;
+	/* dim background */
+	border-radius: 4px;
+	z-index: -1;
+}
+
+.dateTagUnknown {
+	--ext-table-date-tag-bck-clr: darkgray;
+}
+.upcomingDueDate {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: lightslategray;
+}
+/* Due Today */
+.dueToday {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: lightslategray;
+}
+/* Overdue (1–3 days late) */
+.overdueDueDate {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: lightcoral;
+}
+/* Long Overdue (4–14 days late) */
+.longOverdue {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: firebrick;
+}
+/* Critically Overdue (25+ days late) */
+.criticallyOverdue {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: #8B00FF;
+}
+/* Future (Beyond 7 days) */
+.futureDueDate {
+	--ext-table-date-tag-clr: white;
+	--ext-table-date-tag-bck-clr: #008000;
 }

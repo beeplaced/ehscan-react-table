@@ -18,6 +18,7 @@ type TableColumn = {
   title?: string;
   type?: string;
   search?: boolean;
+  width?: number;
 };
 
 type SortOrder = { tag: string; dir: "asc" | "desc" };
@@ -37,7 +38,7 @@ type Props = {
 export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder, cellComponents, setSelectedIds, searchTermArraySetter, setSearchTermArraySetter, fallback }) => {
 
   const [wrapperBottom, setWrapperBottom] = useState<number | undefined>(undefined);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLTableSectionElement>(null);
   const tableSearchTerms = useRef<Record<string, string>>({});
   const [openCol, setOpenCol] = useState<string | undefined>(undefined);
   const [checkAll, setCheckAll] = useState(false);
@@ -55,13 +56,17 @@ export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder,
     const calculateHeight = () => {
       if (headerRef.current) {
         const { bottom } = headerRef.current.getBoundingClientRect();
-        setWrapperBottom(bottom)
+        setWrapperBottom(bottom);
       }
     };
     calculateHeight();
     window.addEventListener("resize", calculateHeight);
     return () => window.removeEventListener("resize", calculateHeight);
   }, []);
+
+  useEffect(() => {
+    console.log(wrapperBottom)
+  },[wrapperBottom])
 
   const checkHead = (entry: boolean) => {
     if (entry === undefined) return;
@@ -150,14 +155,15 @@ export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder,
   };
 
   const HeadColMain = ({ col }: { col: TableColumn }) => {
-    const { tag, search, title } = col;
-    const colTitle = title || tag;
+    const { tag, search, title, width } = col;
+    const colTitle = title !== undefined ? title : tag;
+    const thWidth = width  !== undefined ? `${width}px` : "30px";
     return (
-      <th>
+      <th style={{ "--custom-width": thWidth } as React.CSSProperties}>
         <div className={styles.headcolcell}>
           <HeadColSort tag={tag} />
           <div className={styles.headcolcellmain}>
-            {search ? <HeadSearchBar content={colTitle} tag={tag} /> : <div>{colTitle}</div>}
+            {search ? <HeadSearchBar content={colTitle} tag={tag} /> : <div onClick={() => setOpenCol(tag)}>{colTitle}</div>}
           </div>
         </div>
       </th>
@@ -168,10 +174,11 @@ export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder,
     return (
       <>
         {columns.map((col, i) => {
-          const { tag, type } = col;
+          const { tag, type, width } = col;
+          const thWidth = width  !== undefined ? `${width}px` : "8px";
           if (type === "checkbox") {
             return (
-              <th key={`checkbox-${tag ?? i}`} className={styles.thcheckhead} style={{ "--custom-width": `32px` } as React.CSSProperties} >
+              <th key={`checkbox-${tag ?? i}`} className={styles.thcheckhead} style={{ "--custom-width": thWidth, padding: "5px" } as React.CSSProperties} >
                 <TableCellSelectHeadCol checkHead={checkHead} checkAll={checkAll} />
               </th>
             );
@@ -221,7 +228,7 @@ export const Table: React.FC<Props> = ({ columns, rows, sortOrder, setSortOrder,
     <>
       <div className={`${styles.tablewrapper} ${styles['_tbl']}`} style={{ height: `calc(100vh - ${wrapperBottom}px)` }} >
         <table className={styles.exttable}>
-          <thead>
+          <thead ref={headerRef}>
             <tr className={styles.trstickyhead}>
               <HeadCols />
             </tr>

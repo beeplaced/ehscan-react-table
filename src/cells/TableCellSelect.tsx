@@ -1,4 +1,4 @@
-import TableChecklistItem from "./TableChecklistItem";
+import TableChecklistItem from "../elements/TableChecklistItem";
 
 type SelectProps = {
   rowIndex: number;
@@ -11,7 +11,7 @@ type Props = {
   selectRow: (args: SelectProps, shift: boolean) => void;
 };
 
-const TableCellSelect: React.FC<Props> = ({ rowIndex, checked, selectRow }) => {
+export const TableCellSelect: React.FC<Props> = ({ rowIndex, checked, selectRow }) => {
 
   const checkClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const shift = event.shiftKey;
@@ -25,5 +25,3 @@ const TableCellSelect: React.FC<Props> = ({ rowIndex, checked, selectRow }) => {
       </>
   );
 };
-
-export default TableCellSelect;
