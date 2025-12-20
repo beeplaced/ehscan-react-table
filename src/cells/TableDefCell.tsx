@@ -4,13 +4,14 @@ type TableDefCellProps = {
   content: ReactNode;
   id: string | number;
   col: string | number;
+  small?: boolean;
   clickRow: (args: { id: string | number; col: string | number; type: 'default' }) => void;
 };
 
-export const TableDefCell: React.FC<TableDefCellProps> = ({ content, id, col, clickRow }) => {
+export const TableDefCell: React.FC<TableDefCellProps> = ({ content, id, col, small, clickRow }) => {
   return (
     <div onClick={() => clickRow({ id, col, type: 'default' })}>
-      {content}
+      {small ? 'Small' : ''} {content}
     </div>
   );
 };

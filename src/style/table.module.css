@@ -1,44 +1,4 @@
 /* --------------------------
-General Settings
--------------------------- */
-html,
-body,
-input,
-textarea {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    font-family: Inter, sans-serif;
-    font-style: 400;
-    font-optical-sizing: auto;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizelegibility;
-    letter-spacing: 0.072px;
-    overflow: hidden;
-    color: #222;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-html,
-body {
-    touch-action: none;
-    overscroll-behavior: none;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    user-select: none;
-}
-
-/* --------------------------
 TableView
 -------------------------- */
 .tableouterwrapper {
@@ -207,7 +167,6 @@ svg.removesearchsvg{
     height: var(--ext-search-wrapper-height, 25px);
     --input-padding: 1px 5px 3px 0;
 }
-
 
 .focused {
     border: var(--ext-search-wrapper-focused-border, 1px dashed white);
@@ -505,7 +464,7 @@ RIPPLE
 	position: relative;
 	color: var(--ext-table-date-tag-clr, black);
 	padding: 3px 6px;
-	border-radius: 4px;
+	border-radius: var(--ext-table-date-br, 4px);
 	font-size: 0.65rem;
 	font-weight: 600;
 	display: inline-block;
@@ -514,7 +473,10 @@ RIPPLE
 	white-space: nowrap;
 	width: fit-content;
 	z-index: 0;
+    min-height: var(--ext-table-min-wh, 15px);
+    min-width: var(--ext-table-min-wh, 15px);
 }
+
 .dateTag::before {
 	content: "";
 	position: absolute;
@@ -522,8 +484,13 @@ RIPPLE
 	background-color: var(--ext-table-date-tag-bck-clr, darkgrey);
 	opacity: 0.7;
 	/* dim background */
-	border-radius: 4px;
+	border-radius: var(--ext-table-date-br, 4px);
 	z-index: -1;
+}
+
+.dateTagSmall{
+    --ext-table-date-br: 50px;
+    --ext-table-min-wh: 20px;
 }
 
 .dateTagUnknown {
