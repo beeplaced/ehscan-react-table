@@ -460,6 +460,12 @@ RIPPLE
 	}
 }
 
+.dueDateColWrapper{
+    display: flex;
+    width: 100%;
+    text-align: center;
+}
+
 .dateTag {
 	position: relative;
 	color: var(--ext-table-date-tag-clr, black);

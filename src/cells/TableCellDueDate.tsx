@@ -20,7 +20,7 @@ export const TableCellDueDate: React.FC<Props> = ({ content, id, col, small, cli
   }
 
   return (
-    <div onClick={() => clickRow({ id, col, type: 'default' })} style={{ width: "100%", textAlign: "center" }} >
+    <div className={styles.dueDateColWrapper} onClick={() => clickRow({ id, col, type: 'default' })} >
       <DateContent value={content} />
     </div>
   );
