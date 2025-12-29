@@ -20,6 +20,7 @@ type TableColumn = {
   search?: boolean;
   width?: number;
   small?: boolean;
+  important?: boolean;
 };
 
 type SortOrder = { tag: string; dir: "asc" | "desc" };
@@ -43,6 +44,7 @@ type Props = {
   setNearBottom: (nearBottom: boolean) => void;
   changeColumns: (args: any) => void;
   measureCols: MeasureCol[];
+  displayImportant?: boolean;
 };
 
 export const Table: React.FC<Props> = ({
@@ -58,7 +60,8 @@ export const Table: React.FC<Props> = ({
   nearBottom,
   setNearBottom,
   changeColumns,
-  measureCols
+  measureCols,
+  displayImportant
 }) => {
   const [wrapperBottom, setWrapperBottom] = useState<number | undefined>(undefined);
   const headerRef = useRef<HTMLTableSectionElement>(null);
@@ -241,7 +244,9 @@ export const Table: React.FC<Props> = ({
   const HeadCols = () => {
     return (
       <>
-        {columns.map((col, i) => {
+        {columns
+        .filter(col => !displayImportant || col.important)
+        .map((col, i) => {
           const { tag, type, width } = col;
           const thWidth = width !== undefined ? `${width}px` : "8px";
           if (type === "checkbox") {
@@ -276,7 +281,9 @@ export const Table: React.FC<Props> = ({
       <tbody key='ext-tbody' className={`${styles.tablebody} ${styles._tbl}`}>
         {rows && rows.map((row, rowIndex) => (
           <tr key={`row-${rowIndex}`} className={styles.deftabletr}>
-            {columns.map((col, ci) => {
+            {columns
+            .filter(col => !displayImportant || col.important)
+            .map((col, ci) => {
               const type = col.type ?? "def";
               const CellComponent = cellComponents[type];
               return (
@@ -294,7 +301,7 @@ export const Table: React.FC<Props> = ({
 
   return (
     <>
-      <div className={`${styles.tablewrapper} ${styles['_tbl']}`} style={{ height: `calc(100vh - ${wrapperBottom}px)` }}
+      <div className={`${styles.tablewrapper} ${styles['_tbl']}`} style={{ maxHeight: `calc(100vh - ${wrapperBottom}px)` }}
         ref={scrollRef}>
         <table className={styles.exttable}>
           <thead ref={headerRef}>

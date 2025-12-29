@@ -1,6 +1,6 @@
 {
   "name": "ehscan-react-table",
-  "version": "0.0.31",
+  "version": "0.0.33",
   "description": "components",
   "main": "dist/Components.js",
   "types": "dist/Components.d.ts",
